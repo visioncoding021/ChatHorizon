@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CgProfile } from "react-icons/cg";
-import {useValidator} from '6pp'
+import {useInputValidation} from '6pp'
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -9,9 +9,10 @@ const Login = () => {
         setIsLogin(!isLogin);
     }
 
-    const name = useValidator("");
-    const password = useValidator("");
-    const bio = useValidator("");
+    const name = useInputValidation("");
+    const password = useInputValidation("");
+    const bio = useInputValidation("");
+    const username = useInputValidation("");
 
     return (
         <div className="flex justify-center items-center h-screen bg-gradient-to-tr from-yellow-500 to-blue-500">

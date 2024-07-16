@@ -5,6 +5,7 @@ const Home  = lazy(()=> import("./pages/Home"));
 const Login = lazy(()=>import("./pages/Login"));
 const Chats = lazy(()=>import("./pages/Chats"));
 const Groups = lazy(()=>import("./pages/Groups"))
+const NotFound = lazy(()=> import("./pages/NotFound"))
 function App() {
  let user = true;
   return (
@@ -24,7 +25,7 @@ function App() {
           </ProtectRoute>
          
           }></Route>
-         <Route path="*" element={<h1>404 not found</h1>}></Route>
+         <Route path="*" element={<NotFound/>}></Route>
       </Routes>
     </Router>
   )

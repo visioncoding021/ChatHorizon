@@ -1,18 +1,30 @@
 import { useState } from 'react';
 import { CgProfile } from "react-icons/cg";
-import {useInputValidation} from '6pp'
+import {useInputValidation,useStrongPassword} from '6pp'
+import Error from '../components/Error';
+import { usernmaeValidator } from '../utils/validator';
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
 
     function toggleLogin() {
-        setIsLogin(!isLogin);
+        setIsLogin(!isLogin); 
     }
 
-    const name = useInputValidation("");
-    const password = useInputValidation("");
-    const bio = useInputValidation("");
-    const username = useInputValidation("");
+
+    const [username,setUserName] = useState(null);
+    const password = useStrongPassword();
+  
+
+    function checkName(name){
+        
+        setUserName( usernmaeValidator(name));
+        console.log(username);
+        
+        
+      
+
+    }
 
     return (
         <div className="flex justify-center items-center h-screen bg-gradient-to-tr from-yellow-500 to-blue-500">
@@ -26,7 +38,13 @@ const Login = () => {
                         <>
                             <div className='mb-4'>
                                 <label htmlFor="username" className='block text-sm font-medium text-gray-700'>User Name</label>
-                                <input type='text' id="username" placeholder='User Name' className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2' />
+                                <input 
+                                type='text'
+                                id="username" 
+                                placeholder='User Name'
+                                 className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2' 
+                              
+                                 />
                             </div>
                             <div className='mb-4'>
                                 <label htmlFor="password" className='block text-sm font-medium text-gray-700'>Password</label>
@@ -56,7 +74,15 @@ const Login = () => {
                             </div>
                             <div className='mb-4'>
                                 <label htmlFor="username" className='block text-sm font-medium text-gray-700'>User Name</label>
-                                <input type='text' id="username" placeholder='User Name' className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2' />
+                                <input 
+                                type='text' 
+                                id="username" 
+                                placeholder='User Name' 
+                                className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2' 
+                                onChange={(e)=>{checkName(e.target.value)}}
+                                />
+                                {username!==undefined && username!==null ? 
+                                (<Error typeErr={"username error"} message={"username should not contains space and special characters"}/>):""}
                             </div>
                             <div className='mb-4'>
                                 <label htmlFor="password" className='block text-sm font-medium text-gray-700'>Password</label>
